@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a= 10;
+        let arr = [12,34];
+        function fun(a,arr){
+            a= 20;
+            arr[0]=200;
+        }
+        fun(a,arr.slice());
+        console.log(a);
+        console.log(arr);
+
+        let marks =[12,34,23,56]
+        let result = marks.filter((m) => {
+            if(m>50)
+            return true
+            
+            else
+            return false
+        })
+        console.log(result);        
+    </script>
+</body>
+</html>

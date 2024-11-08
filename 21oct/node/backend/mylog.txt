@@ -1,0 +1,49 @@
+Request from this function (name, family) {
+  const interfaces = os.networkInterfaces();
+
+  //
+  // Default to `ipv4`
+  //
+  family = _normalizeFamily(family);
+
+  //
+  // If a specific network interface has been named,
+  // return the address.
+  //
+  if (name && name !== 'private' && name !== 'public') {
+    const res = interfaces[name].filter((details) => {
+      const itemFamily = _normalizeFamily(details.family);
+      return itemFamily === family;
+    });
+    if (res.length === 0) {
+      return undefined;
+    }
+    return res[0].address;
+  }
+
+  const all = Object.keys(interfaces).map((nic) => {
+    //
+    // Note: name will only be `public` or `private`
+    // when this is called.
+    //
+    const addresses = interfaces[nic].filter((details) => {
+      details.family = _normalizeFamily(details.family);
+      if (details.family !== family || ip.isLoopback(details.address)) {
+        return false;
+      } if (!name) {
+        return true;
+      }
+
+      return name === 'public' ? ip.isPrivate(details.address)
+        : ip.isPublic(details.address);
+    });
+
+    return addresses.length ? addresses[0].address : undefined;
+  }).filter(Boolean);
+
+  return !all.length ? ip.loopback(family) : all[0];
+} 
+Request from this 192.168.0.158 on Tue Oct 22 2024 13:46:28 GMT+0530 (India Standard Time) 
+Request from this 192.168.0.158 on Tue Oct 22 2024 13:48:13 GMT+0530 (India Standard Time) 
+Request from this 192.168.0.158 on Tue Oct 22 2024 13:49:23 GMT+0530 (India Standard Time) 
+Request from this 192.168.0.158 on Tue Oct 22 2024 13:50:03 GMT+0530 (India Standard Time) 

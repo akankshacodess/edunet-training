@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .gridContainer{
+            display: grid;
+            grid-template-columns: repeat(2,minmax(200px,1fr))
+        }
+        .gridContainer div{
+            border:4px solid red;
+            margin: 5px;
+            text-align: center;
+            padding:40px;
+        }
+
+        /* #gridItem1{
+            grid-column-start: 1;
+            grid-column-end:4;
+        }
+        #gridItem2{
+            grid-row-start: 2;
+            grid-row-end: 3;
+        }
+        #gridItem3{
+            
+            grid-column-start: 2;
+            grid-column-end: 4;
+        }
+        #gridItem4{
+            grid-column-start: 1;
+            grid-column-end: 4;
+        } */
+    </style>
+</head>
+<body>
+    <div class="gridContainer">
+        <div id="gridItem1">Header</div>
+        <div id="gridItem2">Left</div>
+        <div id="gridItem3">Main
+            
+        </div>
+        <div id="gridItem4">Footer</div>
+        
+    </div>
+</body>
+</html>
